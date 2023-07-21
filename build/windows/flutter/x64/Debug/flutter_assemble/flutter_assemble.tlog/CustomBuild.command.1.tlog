@@ -1,0 +1,28 @@
+^D:\FLUTTERAPPS\FLUTTER1\BUILD\WINDOWS\CMAKEFILES\0ABE1B56EAF5BE8CE67F7C412B93B8C0\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=D:\flutter_windows_3.10.5-stable\flutter PROJECT_DIR=D:\flutterApps\flutter1 FLUTTER_ROOT=D:\flutter_windows_3.10.5-stable\flutter FLUTTER_EPHEMERAL_DIR=D:\flutterApps\flutter1\windows\flutter\ephemeral PROJECT_DIR=D:\flutterApps\flutter1 FLUTTER_TARGET=D:\flutterApps\flutter1\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC80NWY2ZTAwOTExMGRmNGYzNGVjMmNmOTlmNjNjZjczYjcxYjdhNDIwLw== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=D:\flutterApps\flutter1\.dart_tool\package_config.json D:/flutter_windows_3.10.5-stable/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\FLUTTERAPPS\FLUTTER1\BUILD\WINDOWS\CMAKEFILES\E96CE3C4EE6C6A4E4C19E39DDA105C59\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\FLUTTERAPPS\FLUTTER1\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/flutterApps/flutter1/windows -BD:/flutterApps/flutter1/build/windows --check-stamp-file D:/flutterApps/flutter1/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
