@@ -15,6 +15,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   List<profileModel> profileList = [];
   Future<List<profileModel>> getUserInfo() async {
+    profileList.clear();
     final response = await http.post(
         Uri.parse(
             "http://mobileandwebsitedevelopment.com/qapril/api/get_user_data?user_id=107"),
@@ -57,7 +58,6 @@ class _ProfileState extends State<Profile> {
                       return ListView.builder(
                           itemCount: profileList.length,
                           itemBuilder: ((context, index) {
-                            print(profileList[index].record!.city.toString());
                             return Padding(
                               padding: const EdgeInsets.only(top: 50),
                               child: Column(
@@ -355,21 +355,6 @@ class _ProfileState extends State<Profile> {
                     return Text("Loading...");
                   }),
             )
-            // FutureBuilder(
-            //     future: getUserInfo(),
-            //     builder: (context, snapshot) {
-            //       if (snapshot.hasData) {
-            //         Text("Loading");
-            //       } else {
-            //         return ListView.builder(
-            //     itemCount: profileList.length,
-            //     itemBuilder: (context, index) {
-            //       // Display the data from the profileList
-            //       return Text(profileList[index].toString());
-            //     },
-            //   );
-            //       }
-            //     })
           ],
         ),
       ),
