@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter1/screens/editProfile.dart';
+import 'package:flutter1/screens/login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -14,6 +17,8 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   List<profileModel> profileList = [];
+  final _auth = FirebaseAuth.instance;
+
   Future<List<profileModel>> getUserInfo() async {
     profileList.clear();
     final response = await http.post(
@@ -340,6 +345,27 @@ class _ProfileState extends State<Profile> {
                                                         TextStyle(fontSize: 15),
                                                   )
                                                 ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 20),
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      _auth
+                                                          .signOut()
+                                                          .then((value) {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        MyHomePage()));
+                                                      });
+                                                    },
+                                                    icon: Icon(
+                                                      Icons.logout_outlined,
+                                                      size: 35,
+                                                    )),
                                               ),
                                             ],
                                           ),
