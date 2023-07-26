@@ -44,6 +44,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("D:/flutterApps/flutter1/build/windows/plugins/firebase_core/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/cmake_install.cmake")
 endif()
 
@@ -152,34 +157,43 @@ endif()
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
     list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-     "D:/flutterApps/flutter1/build/windows/runner/Debug/modal_progress_hud_nsn_plugin.dll")
+     "D:/flutterApps/flutter1/build/windows/runner/Debug/firebase_core_plugin.dll;D:/flutterApps/flutter1/build/windows/runner/Debug/modal_progress_hud_nsn_plugin.dll")
     if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
       message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
     if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
       message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
-    file(INSTALL DESTINATION "D:/flutterApps/flutter1/build/windows/runner/Debug" TYPE FILE FILES "D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/Debug/modal_progress_hud_nsn_plugin.dll")
+    file(INSTALL DESTINATION "D:/flutterApps/flutter1/build/windows/runner/Debug" TYPE FILE FILES
+      "D:/flutterApps/flutter1/build/windows/plugins/firebase_core/Debug/firebase_core_plugin.dll"
+      "D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/Debug/modal_progress_hud_nsn_plugin.dll"
+      )
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Pp][Rr][Oo][Ff][Ii][Ll][Ee])$")
     list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-     "D:/flutterApps/flutter1/build/windows/runner/Profile/modal_progress_hud_nsn_plugin.dll")
+     "D:/flutterApps/flutter1/build/windows/runner/Profile/firebase_core_plugin.dll;D:/flutterApps/flutter1/build/windows/runner/Profile/modal_progress_hud_nsn_plugin.dll")
     if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
       message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
     if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
       message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
-    file(INSTALL DESTINATION "D:/flutterApps/flutter1/build/windows/runner/Profile" TYPE FILE FILES "D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/Profile/modal_progress_hud_nsn_plugin.dll")
+    file(INSTALL DESTINATION "D:/flutterApps/flutter1/build/windows/runner/Profile" TYPE FILE FILES
+      "D:/flutterApps/flutter1/build/windows/plugins/firebase_core/Profile/firebase_core_plugin.dll"
+      "D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/Profile/modal_progress_hud_nsn_plugin.dll"
+      )
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
     list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-     "D:/flutterApps/flutter1/build/windows/runner/Release/modal_progress_hud_nsn_plugin.dll")
+     "D:/flutterApps/flutter1/build/windows/runner/Release/firebase_core_plugin.dll;D:/flutterApps/flutter1/build/windows/runner/Release/modal_progress_hud_nsn_plugin.dll")
     if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
       message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
     if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
       message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
-    file(INSTALL DESTINATION "D:/flutterApps/flutter1/build/windows/runner/Release" TYPE FILE FILES "D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/Release/modal_progress_hud_nsn_plugin.dll")
+    file(INSTALL DESTINATION "D:/flutterApps/flutter1/build/windows/runner/Release" TYPE FILE FILES
+      "D:/flutterApps/flutter1/build/windows/plugins/firebase_core/Release/firebase_core_plugin.dll"
+      "D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/Release/modal_progress_hud_nsn_plugin.dll"
+      )
   endif()
 endif()
 

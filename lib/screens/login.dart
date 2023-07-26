@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter1/screens/forgot_password.dart';
 import 'package:flutter1/screens/profile.dart';
 import 'package:flutter1/screens/registration.dart';
 import 'package:flutter1/screens/verify_code.dart';
+import 'package:flutter1/utils/utils.dart';
 import 'package:http/http.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -16,9 +18,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final _formkey = GlobalKey<FormState>();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController Controller = TextEditingController();
+
+  final _auth = FirebaseAuth.instance;
 
   void login(String email, password) async {
     try {
@@ -36,6 +41,27 @@ class _MyHomePageState extends State<MyHomePage> {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    userNameController.dispose();
+    passwordController.dispose();
+  }
+
+  void loginPage() {
+    _auth
+        .signInWithEmailAndPassword(
+            email: userNameController.text.toString(),
+            password: passwordController.text.toString())
+        .then((value) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Profile()));
+    }).onError((error, stackTrace) {
+      utils.toastMessage(error.toString());
+    });
   }
 
   @override
@@ -97,62 +123,84 @@ class _MyHomePageState extends State<MyHomePage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          child: SizedBox(
-                            height: 50,
-                            child: Material(
-                              elevation: 0.5,
-                              borderRadius: BorderRadius.circular(25),
-                              child: TextField(
-                                controller: userNameController,
-                                decoration: InputDecoration(
-                                    hintText: "Username/Email",
-                                    prefixIcon: Icon(
-                                      Icons.person,
-                                      color: Color.fromARGB(255, 247, 118, 59),
+                        Form(
+                            key: _formkey,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 20),
+                                  child: SizedBox(
+                                    height: 50,
+                                    child: Material(
+                                      elevation: 0.5,
+                                      borderRadius: BorderRadius.circular(25),
+                                      child: TextFormField(
+                                        controller: userNameController,
+                                        decoration: InputDecoration(
+                                            hintText: "Username/Email",
+                                            prefixIcon: Icon(
+                                              Icons.person,
+                                              color: Color.fromARGB(
+                                                  255, 247, 118, 59),
+                                            ),
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(50))),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Enter Email";
+                                          }
+                                          return null;
+                                        },
+                                      ),
                                     ),
-                                    hintStyle: TextStyle(color: Colors.grey),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius:
-                                            BorderRadius.circular(50))),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          child: SizedBox(
-                            height: 50,
-                            child: Material(
-                              elevation: 0.5,
-                              borderRadius: BorderRadius.circular(25),
-                              child: TextField(
-                                controller: passwordController,
-                                decoration: InputDecoration(
-                                    hintText: "Password",
-                                    prefixIcon: Icon(Icons.lock,
-                                        color:
-                                            Color.fromARGB(255, 247, 118, 59)),
-                                    suffixIcon: Icon(
-                                        Icons.remove_red_eye_outlined,
-                                        color:
-                                            Color.fromARGB(255, 247, 118, 59)),
-                                    hintStyle: TextStyle(color: Colors.grey),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius:
-                                            BorderRadius.circular(50))),
-                              ),
-                            ),
-                          ),
-                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 20),
+                                  child: SizedBox(
+                                    height: 50,
+                                    child: Material(
+                                      elevation: 0.5,
+                                      borderRadius: BorderRadius.circular(25),
+                                      child: TextFormField(
+                                        obscureText: true,
+                                        controller: passwordController,
+                                        decoration: InputDecoration(
+                                            hintText: "Password",
+                                            prefixIcon: Icon(Icons.lock,
+                                                color: Color.fromARGB(
+                                                    255, 247, 118, 59)),
+                                            suffixIcon: Icon(
+                                                Icons.remove_red_eye_outlined,
+                                                color: Color.fromARGB(
+                                                    255, 247, 118, 59)),
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(50))),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Enter Password";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
                         Align(
                             alignment: Alignment.centerRight,
                             child: Padding(
@@ -186,13 +234,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             },
                             child: GestureDetector(
                               onTap: () {
-                                login(userNameController.text.toString(),
-                                    passwordController.text.toString());
-
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Profile()));
+                                // login(userNameController.text.toString(),
+                                //     passwordController.text.toString());
+                                if (_formkey.currentState!.validate()) {
+                                  loginPage();
+                                }
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.5,

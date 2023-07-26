@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "879837272762",
+    "project_id": "ecommerce-8d698",
+    "storage_bucket": "ecommerce-8d698.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879837272762:android:4e1a2655d11b909b254083",
+        "android_client_info": {
+          "package_name": "com.example.flutter1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879837272762-509ag17ikhf2b6116o34shr9u9qdrdcg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrGnEg2T1jAN6nCiXiSFfSGANHWCLU3NI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879837272762-509ag17ikhf2b6116o34shr9u9qdrdcg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

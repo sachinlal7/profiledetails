@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter1/screens/profile.dart';
+import 'package:flutter1/screens/splash_screen.dart';
 import 'screens/login.dart';
 import 'screens/registration.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -20,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: SplashScreen(),
     );
   }
 }

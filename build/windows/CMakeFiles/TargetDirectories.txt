@@ -8,6 +8,10 @@ D:/flutterApps/flutter1/build/windows/flutter/CMakeFiles/INSTALL.dir
 D:/flutterApps/flutter1/build/windows/runner/CMakeFiles/flutter1.dir
 D:/flutterApps/flutter1/build/windows/runner/CMakeFiles/INSTALL.dir
 D:/flutterApps/flutter1/build/windows/runner/CMakeFiles/ALL_BUILD.dir
+D:/flutterApps/flutter1/build/windows/plugins/firebase_core/CMakeFiles/firebase_core_plugin.dir
+D:/flutterApps/flutter1/build/windows/plugins/firebase_core/CMakeFiles/INSTALL.dir
+D:/flutterApps/flutter1/build/windows/plugins/firebase_core/CMakeFiles/ALL_BUILD.dir
+D:/flutterApps/flutter1/build/windows/plugins/firebase_core/bin/CMakeFiles/INSTALL.dir
 D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/CMakeFiles/modal_progress_hud_nsn_plugin.dir
 D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/CMakeFiles/INSTALL.dir
 D:/flutterApps/flutter1/build/windows/plugins/modal_progress_hud_nsn/CMakeFiles/ALL_BUILD.dir

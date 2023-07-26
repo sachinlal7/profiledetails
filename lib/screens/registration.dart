@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter1/screens/forgot_password.dart';
 import 'package:flutter1/screens/login.dart';
 import 'package:flutter1/screens/verify_code.dart';
+import 'package:flutter1/utils/utils.dart';
 import 'package:http/http.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -14,6 +16,7 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
+  final _formkey = GlobalKey<FormState>();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -44,6 +47,8 @@ class _RegistrationState extends State<Registration> {
       print(e.toString());
     }
   }
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +109,248 @@ class _RegistrationState extends State<Registration> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Form(
+                            key: _formkey,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 14, right: 25, left: 25),
+                                  child: SizedBox(
+                                    height: 40,
+                                    child: Material(
+                                      elevation: 0.5,
+                                      borderRadius: BorderRadius.circular(25),
+                                      child: TextFormField(
+                                        controller: fullNameController,
+                                        decoration: InputDecoration(
+                                            hintText: "Full name",
+                                            prefixIcon: Icon(
+                                              Icons.person,
+                                              color: Color.fromARGB(
+                                                  255, 247, 118, 59),
+                                            ),
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(50))),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Enter Full Name";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 14, right: 25, left: 25),
+                                  child: SizedBox(
+                                    height: 40,
+                                    child: Material(
+                                      elevation: 0.5,
+                                      borderRadius: BorderRadius.circular(25),
+                                      child: TextFormField(
+                                        controller: userNameController,
+                                        decoration: InputDecoration(
+                                            hintText: "Username/ Email",
+                                            prefixIcon: Icon(
+                                              Icons.person,
+                                              color: Color.fromARGB(
+                                                  255, 247, 118, 59),
+                                            ),
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(50))),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Enter Email";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 14, right: 25, left: 25),
+                                  child: SizedBox(
+                                    height: 40,
+                                    child: Material(
+                                      elevation: 0.5,
+                                      borderRadius: BorderRadius.circular(25),
+                                      child: TextFormField(
+                                        controller: numberController,
+                                        decoration: InputDecoration(
+                                            hintText: "Phone Number",
+                                            prefixIcon: Icon(
+                                              Icons.person,
+                                              color: Color.fromARGB(
+                                                  255, 247, 118, 59),
+                                            ),
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(50))),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Enter Phone Number";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 14, right: 25, left: 25),
+                                  child: SizedBox(
+                                    height: 40,
+                                    child: Material(
+                                      elevation: 0.5,
+                                      borderRadius: BorderRadius.circular(25),
+                                      child: TextFormField(
+                                        controller: passwordController,
+                                        decoration: InputDecoration(
+                                            hintText: "Password",
+                                            prefixIcon: Icon(
+                                              Icons.person,
+                                              color: Color.fromARGB(
+                                                  255, 247, 118, 59),
+                                            ),
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(50))),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Enter Password";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 40, bottom: 20),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ForgotPassword()));
+                                        },
+                                        child: Text(
+                                          "Forgot Password ?",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    )),
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  VerificationCode()));
+                                    },
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        if (_formkey.currentState!.validate()) {
+                                          _auth
+                                              .createUserWithEmailAndPassword(
+                                                  email: userNameController.text
+                                                      .toString(),
+                                                  password: passwordController
+                                                      .text
+                                                      .toString())
+                                              .then((value) {})
+                                              .onError((error, stackTrace) {
+                                            utils
+                                                .toastMessage(error.toString());
+                                          });
+                                        }
+                                        // signup(
+                                        //   userNameController.text.toString(),
+                                        //   passwordController.text.toString(),
+                                        //   numberController.text.toString(),
+                                        //   fullNameController.text.toString(),
+                                        // );
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.5,
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            gradient: LinearGradient(colors: [
+                                              const Color.fromARGB(
+                                                  255, 73, 17, 83),
+                                              Colors.orangeAccent
+                                            ])),
+                                        child: Center(
+                                            child: Text(
+                                          "SIGN UP",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                RichText(
+                                    text: TextSpan(children: [
+                                  TextSpan(
+                                      text: "Have an account ? ",
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                      text: "Login ",
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MyHomePage()));
+                                        }),
+                                ])),
+                              ],
+                            )),
                         SizedBox(
                           height: 15,
                         ),
@@ -115,7 +362,7 @@ class _RegistrationState extends State<Registration> {
                             child: Material(
                               elevation: 0.5,
                               borderRadius: BorderRadius.circular(25),
-                              child: TextField(
+                              child: TextFormField(
                                 controller: fullNameController,
                                 decoration: InputDecoration(
                                     hintText: "Full name",
@@ -128,6 +375,12 @@ class _RegistrationState extends State<Registration> {
                                         borderSide: BorderSide.none,
                                         borderRadius:
                                             BorderRadius.circular(50))),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Enter Full Name";
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
@@ -140,7 +393,7 @@ class _RegistrationState extends State<Registration> {
                             child: Material(
                               elevation: 0.5,
                               borderRadius: BorderRadius.circular(25),
-                              child: TextField(
+                              child: TextFormField(
                                 controller: userNameController,
                                 decoration: InputDecoration(
                                     hintText: "Username/ Email",
@@ -153,6 +406,12 @@ class _RegistrationState extends State<Registration> {
                                         borderSide: BorderSide.none,
                                         borderRadius:
                                             BorderRadius.circular(50))),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Enter Email";
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
@@ -165,7 +424,7 @@ class _RegistrationState extends State<Registration> {
                             child: Material(
                               elevation: 0.5,
                               borderRadius: BorderRadius.circular(25),
-                              child: TextField(
+                              child: TextFormField(
                                 controller: numberController,
                                 decoration: InputDecoration(
                                     hintText: "Phone Number",
@@ -178,6 +437,12 @@ class _RegistrationState extends State<Registration> {
                                         borderSide: BorderSide.none,
                                         borderRadius:
                                             BorderRadius.circular(50))),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Enter Phone Number";
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
@@ -190,7 +455,7 @@ class _RegistrationState extends State<Registration> {
                             child: Material(
                               elevation: 0.5,
                               borderRadius: BorderRadius.circular(25),
-                              child: TextField(
+                              child: TextFormField(
                                 controller: passwordController,
                                 decoration: InputDecoration(
                                     hintText: "Password",
@@ -203,6 +468,12 @@ class _RegistrationState extends State<Registration> {
                                         borderSide: BorderSide.none,
                                         borderRadius:
                                             BorderRadius.circular(50))),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Enter Password";
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),

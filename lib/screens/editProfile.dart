@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -67,6 +68,20 @@ class _EditProfileState extends State<EditProfile> {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  // DateTime _date = DateTime.now();
+  DateTime? _selectedDate;
+
+  List<String> genderOptions = ['Male', 'Female', 'Other'];
+
+  String selectedGender = 'Male';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dobController.text = _selectedDate != null ? _selectedDate.toString() : '';
   }
 
   @override
@@ -141,7 +156,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: TextField(
                               controller: fullNameController,
                               decoration: InputDecoration(
-                                hintText: "",
+                                hintText: "Enter Name",
                                 hintStyle: TextStyle(color: Colors.grey),
                               ),
                             ),
@@ -168,10 +183,27 @@ class _EditProfileState extends State<EditProfile> {
                                     child: TextField(
                                       controller: dobController,
                                       decoration: InputDecoration(
-                                        hintText: "",
+                                        hintText: "Select Date",
                                         hintStyle:
                                             TextStyle(color: Colors.grey),
+                                        // labelText:
+                                        //     "${_date.day}/${_date.month}/${_date.year}",
                                       ),
+                                      onTap: () async {
+                                        DateTime? datePicked =
+                                            await showDatePicker(
+                                                context: context,
+                                                initialDate: DateTime.now(),
+                                                firstDate: DateTime(1980),
+                                                lastDate: DateTime.now());
+
+                                        if (datePicked != null) {
+                                          _selectedDate = datePicked;
+                                          dobController.text =
+                                              formatDate(_selectedDate!);
+                                          print(_selectedDate.toString());
+                                        }
+                                      },
                                     ),
                                   ),
                                 ),
@@ -203,6 +235,37 @@ class _EditProfileState extends State<EditProfile> {
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                         ),
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) => AlertDialog(
+                                                    title:
+                                                        Text("Select Gender"),
+                                                    content:
+                                                        DropdownButton<String>(
+                                                      value: selectedGender,
+                                                      onChanged:
+                                                          (String? newValue) {
+                                                        setState(() {
+                                                          selectedGender =
+                                                              newValue!;
+                                                          genderController
+                                                                  .text =
+                                                              selectedGender;
+                                                        });
+                                                        Navigator.pop(context);
+                                                      },
+                                                      items: genderOptions
+                                                          .map((String gender) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: gender,
+                                                          child: Text(gender),
+                                                        );
+                                                      }).toList(),
+                                                    ),
+                                                  ));
+                                        },
                                       ),
                                     ),
                                   ),
@@ -536,5 +599,10 @@ class _EditProfileState extends State<EditProfile> {
         ),
       ),
     );
+  }
+
+  String formatDate(DateTime date) {
+    // Format the date using intl package and return it as a string
+    return DateFormat('dd MMM yyyy').format(date);
   }
 }
